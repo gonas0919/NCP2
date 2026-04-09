@@ -49,6 +49,8 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.NCP_USER }}@${{ secrets.NCP_HOST }} "
             cd /tmp/my_repo &&
+            systemctl stop nginx || true &&
+            systemctl disable nginx || true &&
             docker compose pull &&
             docker compose up -d --remove-orphans
           "
